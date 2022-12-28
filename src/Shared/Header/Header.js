@@ -1,17 +1,41 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Contexts/AuthProvider";
 import logo from '../../images/logo/Vero-icon-192.png'
 
 const Header = () => {
 
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((err) => console.log(err));
+  };
+
     const menuItems = (
        <React.Fragment>
-
         <li>
-            <Link to='/media'>Media</Link>
-            <Link to='/message'>Message</Link>
-            <Link to='/about'>About</Link>
+        <Link to='/media'>Media</Link>
         </li>
+        <li>
+        <Link to='/message'>Message</Link>
+        </li>
+        <li>
+        <Link to='/about'>About</Link>
+        </li>
+
+        {user?.uid ? (
+        <>
+          <li>
+            <button className="font-bold" onClick={handleLogOut}>Log out</button>
+          </li>
+        </>
+      ) : (
+        <li>
+          <Link className="font-bold" to="/login">Login</Link>
+        </li>
+      )}
        </React.Fragment>
     )
   return (
