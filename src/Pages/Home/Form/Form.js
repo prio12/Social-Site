@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider";
 import "./Form.css";
 // import { useForm } from "react-hook-form";
@@ -13,6 +13,7 @@ const Form = () => {
 
   const imageHostKey = process.env.REACT_APP_imagebb_key;
   const {user} = useContext(AuthContext)
+  const navigate = useNavigate()
 
   const onSubmit = (data) => {
     const imageData = data.image[0];
@@ -45,7 +46,8 @@ const Form = () => {
                     })
                     .then(res => res.json())
                     .then(result => {
-                        console.log(result)
+                      navigate('/media')
+                        // console.log(result)
                     })
 
         }

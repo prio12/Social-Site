@@ -3,6 +3,7 @@ import About from "../Pages/About/About";
 import Home from "../Pages/Home/Home";
 import Media from "../Pages/Media/Media";
 import Message from "../Pages/Message/Message";
+import PostDetails from "../Pages/PostDetails/PostDetails";
 import SignUp from "../SignUp/SignUp";
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
             {
                 path:'/media',
                 element:<Media></Media>
+                // loader: ()=> fetch('http://localhost:5000/posts')
             },
             {
                 path:'/message',
@@ -36,6 +38,11 @@ export const router = createBrowserRouter([
             {
                 path:'/signUp',
                 element:<SignUp></SignUp>
+            },
+            {
+                path:'/posts/:id',
+                element:<PostDetails></PostDetails>,
+                loader: ({params}) => fetch(`http://localhost:5000/posts/${params.id}`)
             }
         ]
     }
