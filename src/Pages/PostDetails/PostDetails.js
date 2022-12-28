@@ -6,8 +6,7 @@ import { BsSuitHeart } from 'react-icons/bs';
 const PostDetails = () => {
   const data = useLoaderData();
   const [isActive, setIsActive] = useState(false);
-//   const [isActive2, setIsActive2] = useState(false);
-
+  
   return (
     <div className="flex  justify-center">
         <div className="card mt-12  shadow-2xl">
@@ -24,7 +23,7 @@ const PostDetails = () => {
         <p>{data.status}</p>
         <div className="card-actions">
           <div className="cursor-pointer select-none">
-       {isActive? <BsFillSuitHeartFill onClick={()=>{
+       {isActive? <BsFillSuitHeartFill  onClick={()=>{
           setIsActive(!isActive)}}/>:
       <BsSuitHeart onClick={()=>{
           setIsActive(!isActive)}} />
