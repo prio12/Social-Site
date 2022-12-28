@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Contexts/AuthProvider";
 import "./Form.css";
 // import { useForm } from "react-hook-form";
 const Form = () => {
@@ -10,9 +12,11 @@ const Form = () => {
   } = useForm();
 
   const imageHostKey = process.env.REACT_APP_imagebb_key;
+  const {user} = useContext(AuthContext)
 
   const onSubmit = (data) => {
     const imageData = data.image[0];
+    const text = data.text;
     const formData = new FormData();
     formData.append('image',imageData)
 
@@ -24,7 +28,26 @@ const Form = () => {
     .then(res => res.json())
     .then(imageUpData =>{
         if(imageUpData.success){
-            console.log(imageUpData.data.url)
+            const posts = {
+              status:text,
+              image:imageUpData.data.url,
+              name:user?.displayName
+            }
+
+            console.log(posts)
+
+            fetch('http://localhost:5000/posts',{
+                        method:"POST",
+                        headers:{
+                            'content-type':"application/json"
+                        },
+                        body:JSON.stringify(posts)
+                    })
+                    .then(res => res.json())
+                    .then(result => {
+                        console.log(result)
+                    })
+
         }
     })
   };
@@ -44,7 +67,12 @@ const Form = () => {
           ></textarea>
           <div className="flex justify-between">
             <input {...register("image")} type="file" />
-            <input className="btn btn-info" type="submit" />
+            {
+              user?.uid ?
+                 <input className="btn btn-info" type="submit" /> :
+                 <Link to='/login'><button className="btn btn-outline btn-error">Login to post</button></Link>
+            }
+            {/* <input className="btn btn-info" type="submit" /> */}
           </div>
         </form>
       </div>

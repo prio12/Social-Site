@@ -20,17 +20,33 @@ const SignUp = () => {
                 // toast.success('User created successfully!!!')
                 navigate(from, { replace: true });
                 console.log(user)
+                
                 const userInfo = {
-                  displayName:data.name
-                }
-                // updateUser(userInfo)
-                // .then(()=>{
-                //   saveUserInfo(data.name,data.email,data.role)
-                // })
-                .catch(err => console.log(err))
+                    displayName:data.name
+                  }
+                  updateUser(userInfo)
+                  .then(()=>{
+                    saveUserInfo(data.name,data.email,data.role)
+                  })
+                  .catch(err => console.log(err))
             })
             .catch(err => console.log(err))
           };
+          
+          const saveUserInfo = (name,email,role) =>{
+            const user = {name,email,role};
+            fetch('https://resale-server-side-seven.vercel.app/users',{
+              method:"POST",
+              headers:{
+                'content-type':'application/json'
+              },
+              body: JSON.stringify(user)
+            })
+            .then(res =>res.json())
+            .then(data => {
+              //  getUserToken(email)
+            })
+          }
         
     return (
         <div className="h-[800px] flex justify-center items-center">
