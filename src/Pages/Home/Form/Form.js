@@ -32,7 +32,8 @@ const Form = () => {
             const posts = {
               status:text,
               image:imageUpData.data.url,
-              name:user?.displayName
+              name:user?.displayName,
+              like:0,
             }
 
             console.log(posts)

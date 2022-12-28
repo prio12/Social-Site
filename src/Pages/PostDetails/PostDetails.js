@@ -5,6 +5,7 @@ import { BsSuitHeart } from 'react-icons/bs';
 
 const PostDetails = () => {
   const data = useLoaderData();
+  const [like,setLike] = useState(data.like)
   const [isActive, setIsActive] = useState(false);
   
   return (
@@ -21,6 +22,7 @@ const PostDetails = () => {
       <div className="card-body items-center text-center">
         <h2 className="card-title">{data.name}</h2>
         <p>{data.status}</p>
+        <span>{like} People liked this</span>
         <div className="card-actions">
           <div className="cursor-pointer select-none">
        {isActive? <BsFillSuitHeartFill  onClick={()=>{
