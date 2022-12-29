@@ -1,6 +1,7 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
 
@@ -35,7 +36,7 @@ const Login = () => {
         providerLogin(googleProvider)
           .then((result) => {
             const user = result.user;
-            console.log(user);
+            toast.success('User created successfully!!!')
             navigate(from, { replace: true });
           })
           .catch((err) => {

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
+import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
 const SignUp = () => {
@@ -17,7 +18,7 @@ const SignUp = () => {
             createUser(data.email,data.password)
             .then(result =>{
                 const user = result.user;
-                // toast.success('User created successfully!!!')
+                toast.success('User created successfully!!!')
                 navigate(from, { replace: true });
                 console.log(user)
                 
@@ -26,16 +27,16 @@ const SignUp = () => {
                   }
                   updateUser(userInfo)
                   .then(()=>{
-                    saveUserInfo(data.name,data.email,data.role)
+                    saveUserInfo(data.name,data.email)
                   })
                   .catch(err => console.log(err))
             })
             .catch(err => console.log(err))
           };
           
-          const saveUserInfo = (name,email,role) =>{
-            const user = {name,email,role};
-            fetch('https://resale-server-side-seven.vercel.app/users',{
+          const saveUserInfo = (name,email) =>{
+            const user = {name,email};
+            fetch('http://localhost:5000/users',{
               method:"POST",
               headers:{
                 'content-type':'application/json'
@@ -44,7 +45,7 @@ const SignUp = () => {
             })
             .then(res =>res.json())
             .then(data => {
-              //  getUserToken(email)
+              console.log(data)
             })
           }
         
