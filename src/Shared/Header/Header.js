@@ -16,30 +16,30 @@ const Header = () => {
     const menuItems = (
        <React.Fragment>
         <li>
-        <Link to='/media'>Media</Link>
+        <Link className="font-bold" to='/media'>Media</Link>
         </li>
         <li>
-        <Link to='/message'>Message</Link>
+        <Link className="font-bold" to='/message'>Message</Link>
         </li>
         <li>
-        <Link to='/about'>About</Link>
+        <Link className="font-bold" to='/about'>About</Link>
         </li>
 
         {user?.uid ? (
         <>
           <li>
-            <button className="font-bold" onClick={handleLogOut}>Log out</button>
+            <button  className="font-bold" onClick={handleLogOut}>Log out</button>
           </li>
         </>
       ) : (
         <li>
-          <Link className="font-bold" to="/login">Login</Link>
+          <Link  className="font-bold" to="/login">Login</Link>
         </li>
       )}
        </React.Fragment>
     )
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 mb-36 shadow-xl">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -66,7 +66,7 @@ const Header = () => {
           </ul>
         </div>
         {/* <a className="btn btn-ghost normal-case text-xl">daisyUI</a> */}
-        <Link className="text-3xl" to='/'>VERO</Link>
+        <Link className="text-3xl font-extrabold " to='/'>VERO</Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">

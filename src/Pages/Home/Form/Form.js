@@ -56,24 +56,24 @@ const Form = () => {
   };
 
   return (
-    <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+    <div className="grid gap-3 p-5 mb-24 shadow-2xl grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
       <div>
         <h3>This is intro and others</h3>
       </div>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <textarea
+          <textarea className="bg-slate-100"
             {...register("text")}
             rows="7"
-            placeholder="Your message"
+            placeholder="What's on your mind?"
             required
           ></textarea>
           <div className="flex justify-between">
-            <input {...register("image")} type="file" />
+            <input className="shadow-xl" {...register("image")} type="file" />
             {
               user?.uid ?
-                 <input className="btn btn-info" type="submit" /> :
-                 <Link to='/login'><button className="btn btn-outline btn-error">Login to post</button></Link>
+                 <input className="btn btn-outline" type="submit" /> :
+                 <Link to='/login'><button className="btn btn-outline btn-error">Login To Post</button></Link>
             }
             {/* <input className="btn btn-info" type="submit" /> */}
           </div>

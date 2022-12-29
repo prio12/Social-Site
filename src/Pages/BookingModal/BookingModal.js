@@ -8,22 +8,23 @@ const BookingModal = ({ userData, isLoading, refetch }) => {
     event.preventDefault();
 
     const form = event.target;
-    const name = form.name.value;
-    const email = form.email.value;
+    // const name = form.name.value;
+    // const email = form.email.value;
     const university = form.university.value;
     const address = form.address.value;
 
     const update = {
-      name: name,
-      email: email,
+      // name: name,
+      // email: email,
       university: university,
       address: address,
     };
+    console.log(update)
 
     fetch(`http://localhost:5000/users/${userData._id}`, {
       method: "PUT",
       headers: {
-        "content-type": "application.json",
+        "content-type": "application/json",
       },
       body: JSON.stringify(update),
     })
@@ -49,15 +50,15 @@ const BookingModal = ({ userData, isLoading, refetch }) => {
           </label>
           <form onSubmit={handleSubmit}>
             <input 
-            name="name"
+            defaultValue={userData?.name}
             type="text"
-            placeholder="Your Name"
+            disabled
             className="input w-full input-bordered"
             />
             <input 
-            name="email"
             type="email"
-            placeholder="Your Email"
+            disabled
+            defaultValue={userData?.email}
             className="input w-full input-bordered"
             />
             <input 
