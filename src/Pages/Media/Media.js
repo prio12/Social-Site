@@ -39,21 +39,6 @@ const Media = () => {
                   <p>{posts.status}</p>
                   <div className='flex justify-between'>
                   <Link to={`/posts/${posts._id}`}><button className="btn btn-outline ">See More</button></Link>
-                    {/* <button className="btn btn-primary">Show Details</button> */}
-                    {/* <div className="cursor-pointer select-none">
-       {isActive? <BsFillSuitHeartFill onClick={()=>{
-          setIsActive(!isActive)}}/>:
-      <BsSuitHeart onClick={()=>{
-          setIsActive(!isActive)}} />
-           }
-      </div> */}
-
-    {/* <div className="cursor-pointer select-none">
-      {isActive2?<MdOutlineAddBox onClick={()=>{
-       setIsActive2(!isActive2)}}/>:
-         <MdAddBox onClick={()=>{
-       setIsActive2(!isActive2)}} />}
-     </div> */}
                   </div>
                 </div>
               </div>)
