@@ -1,3 +1,4 @@
+import Loader from "../Loader/Loader";
 import Login from "../Login/Login";
 import About from "../Pages/About/About";
 import Home from "../Pages/Home/Home";
@@ -29,7 +30,7 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/about',
-                element:<About></About>
+                element:<Loader><About></About></Loader>
             },
             {
                 path:'/login',
