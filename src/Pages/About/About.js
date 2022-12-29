@@ -1,19 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Contexts/AuthProvider';
+import BookingModal from '../BookingModal/BookingModal';
 
 const About = () => {
     const {user} = useContext(AuthContext);
+    console.log(user)
     // const email = user?.email;
     console.log(user?.email)
 
-    const url = `http://localhost:5000/users?email=${user?.email}`;
-    console.log(url)
+    // const url = `http://localhost:5000/users?email=${user?.email}`;
+    // console.log(url)
     
-    const {data:userData ={}, refetch} = useQuery({
+    const {data:userData ={}, refetch, isLoading} = useQuery({
         queryKey:['userData',user?.email],
         queryFn: async () =>{
-            const res = await fetch(`http://localhost:5000/users?email=${user?.email}`);
+            const res = await fetch(`http://localhost:5000/users/data?email=${user?.email}`);
             const data = await res.json();
             console.log(data)
             return data;
@@ -70,8 +72,13 @@ const About = () => {
               className="input input-bordered w-full max-w-xs"
             />
           </div>
-          <input className="btn mt-6 btn-info w-full" type="submit" />
         </form>
+        <label htmlFor="my-modal-3" className="btn">Update Profile</label>
+        <BookingModal
+        userData={userData}
+        refetch={refetch}
+        isLoading={isLoading}
+        ></BookingModal>
       </div>
     </div>
         </div>
