@@ -7,7 +7,7 @@ const Trending = () => {
 
   useEffect(() => {
     setISLoading(true);
-    fetch("https://social-site-server-bice.vercel.app/posts")
+    fetch("https://social-site-server-bice.vercel.app/trending")
       .then((res) => res.json())
       .then((data) => {
         setTrendingData(data);
