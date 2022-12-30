@@ -13,7 +13,7 @@ const Media = () => {
 
     useEffect(() =>{
        setISLoading(true)
-        fetch('http://localhost:5000/posts')
+        fetch('https://social-site-server-bice.vercel.app/posts')
         .then(res => res.json())
         .then(data => {
             setPostData(data)
@@ -22,7 +22,7 @@ const Media = () => {
     },[])
     return (
         <div>
-            <h2>This is media {postData.length}</h2>
+            <h2 className='text-center text-2xl font-extrabold mb-12'>Timeline</h2>
 
            {
             isLoading ? <div className="flex items-center justify-center">
@@ -30,13 +30,13 @@ const Media = () => {
               <span className="visually-hidden">Loading...</span>
             </div>
           </div> :
-            <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3'>
+            <div className='grid p-4 grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3'>
             {
-                postData.map(posts =><div key={posts._id} className="card card-compact">
+                postData.map(posts =><div key={posts._id} className="card my-12 shadow-xl card-compact">
                 <figure><img src={posts.image} style={{height:'250px'}} alt="Shoes" /></figure>
                 <div className="card-body">
-                  <h2 className="card-title">{posts.name}</h2>
-                  <p>{posts.status}</p>
+                  <h2 className="text-xl badge badge-accent p-4 text-center mb-3 font-bold">{posts.name}</h2>
+                  <p className='badge my-5 p-10 badge-outline'>{posts.status.substring(0, 50)}...</p>
                   <div className='flex justify-between'>
                   <Link to={`/posts/${posts._id}`}><button className="btn btn-outline ">See More</button></Link>
                   </div>

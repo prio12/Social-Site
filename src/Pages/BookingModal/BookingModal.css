@@ -1,0 +1,18 @@
+.bookingModalFormInput {
+    margin-bottom: 15px!important;
+    padding: 5px!important;
+    outline: none;
+    font-size: 12px;
+    border-radius: 3px;
+}
+.bookingModalFormInput:last-child {
+    margin-bottom: 0;
+}
+
+label {
+    font-size: 12px!important;
+}
+
+.modal-box {
+    border-radius: 5px;
+}

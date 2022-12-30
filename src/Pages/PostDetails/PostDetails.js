@@ -37,7 +37,7 @@ const PostDetails = () => {
         like,
 
     }
-    fetch(`http://localhost:5000/posts/${post._id}`,{
+    fetch(`https://social-site-server-bice.vercel.app/posts/${post._id}`,{
         method:"PUT",
         headers:{
             'content-type':"application/json"
@@ -62,9 +62,9 @@ const PostDetails = () => {
         />
       </figure>
       <div className="card-body items-center text-center">
-        <h2 className="card-title">{post.name}</h2>
+        <h2 className="card-title badge badge-accent p-5">{post.name}</h2>
         <p>{post.status}</p>
-        <span>{like} People liked this</span>
+        <span className="badge badge-info p-5">{like} People liked this</span>
         <div className="card-actions">
           <div className="cursor-pointer text-2xl select-none">
        {isActive? <BsFillSuitHeartFill  onClick={likeHandler}/>:
@@ -76,12 +76,12 @@ const PostDetails = () => {
         <textarea className="mt-3"
              {...register("text")}
             rows="7"
-            placeholder="Add a Comment"
+            placeholder="Do comments , likes and submit to reach this post on trending!!!"
             required
           ></textarea>
             {
               user?.uid ?
-              <input className="btn btn-info" type="submit" /> :
+              <input className="btn btn-outline" type="submit" /> :
                  <Link to='/login'><button className="btn btn-outline btn-error">Login to post</button></Link>
             }
         </form>

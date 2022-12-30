@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
             {
                 path:'/media',
                 element:<Media></Media>
-                // loader: ()=> fetch('http://localhost:5000/posts')
+                // loader: ()=> fetch('https://social-site-server-bice.vercel.app/posts')
             },
             {
                 path:'/message',
@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
             {
                 path:'/posts/:id',
                 element:<PostDetails></PostDetails>,
-                loader: ({params}) => fetch(`http://localhost:5000/posts/${params.id}`)
+                loader: ({params}) => fetch(`https://social-site-server-bice.vercel.app/posts/${params.id}`)
             }
         ]
     }

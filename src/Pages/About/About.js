@@ -4,86 +4,113 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 import BookingModal from '../BookingModal/BookingModal';
 
 const About = () => {
-    const {user} = useContext(AuthContext);
-    console.log(user)
-    // const email = user?.email;
-    console.log(user?.email)
+  const [userDetails, setUserDetails] = useState();
+  
+  const { user } = useContext(AuthContext);
 
-    // const url = `http://localhost:5000/users?email=${user?.email}`;
-    // console.log(url)
-    
-    const {data:userData ={}, refetch, isLoading} = useQuery({
-        queryKey:['userData',user?.email],
-        queryFn: async () =>{
-            const res = await fetch(`http://localhost:5000/users/data?email=${user?.email}`);
-            const data = await res.json();
-            console.log(data)
-            return data;
-        }
-    })
+  const {
+    data: userData = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["userData", user?.email],
+    queryFn: async () => {
+      const res = await fetch(
+        `https://social-site-server-bice.vercel.app/usersQueryEmail?email=${user?.email}`
+      );
+      const data = await res.json();
+      setUserDetails(data);
+      console.log(data);
+      return data;
+    },
+  });
+
+
+    // if(isLoading){
+    //   return (
+    //     <div className="flex items-center justify-center">
+    //         <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+    //           <span className="visually-hidden">Loading...</span>
+    //         </div>
+    //       </div>
+    //   )
+    // }
+
     return (
-        <div className='flex justify-center'>
-            <div className='mt-12'>
-            <div className="h-[800px] flex justify-center items-center">
-      <div className="w-96 p-7">
-        <h2 className="text-3xl text-center">Profile</h2>
-        <form>
-          <div className="form-control my-6 w-full max-w-xs">
-            <label className="label">
-              <span className="label-text">Name</span>
+      <div className="flex shadow-2xl p-16 justify-center">
+      <div className="">
+        <div className="lex">
+          <div  className="w-full p-7">
+            <h2 className="text-2xl font-extrabold mb-12 text-center">Profile</h2>
+
+            {userDetails?.map((user) => (
+              <div className='shadow-xl mb-12 p-5' key={user._id}>
+                <form>
+                  <div className="">
+                    <label className="label">
+                      <span className="label-text font-extrabold">Name</span>
+                    </label>
+                    <input
+                      type="text"
+                      disabled
+                      defaultValue={user.name}
+                      // className="border px-3 py-2 w-full max-w-xs"
+                      className="w-full border border-black bookingModalFormInput"
+                    />
+                  </div>
+                  <div className="form-control my-6 w-full max-w-xs">
+                    <label className="label">
+                      <span className="label-text font-extrabold">Email</span>
+                    </label>
+                    <input
+                      defaultValue={user.email}
+                      type="email"
+                      disabled
+                      className="w-full border border-black bookingModalFormInput"
+                    />
+                  </div>
+                  <div className="form-control my-6 w-full max-w-xs">
+                    <label className="label">
+                      <span className="label-text font-extrabold">
+                        University/School/College
+                      </span>
+                    </label>
+                    <input
+                      defaultValue={user.university}
+                      disabled
+                      type="text"
+                      className="w-full border border-black bookingModalFormInput"
+                    />
+                  </div>
+                  <div className="form-control my-6 w-full max-w-xs">
+                    <label className="label">
+                      <span className="label-text font-extrabold">Address</span>
+                    </label>
+                    <input
+                      defaultValue={user.address}
+                      disabled
+                      type="text"
+                      className="w-full border border-black bookingModalFormInput"
+                    />
+                  </div>
+                </form>
+              </div>
+            ))}
+
+            <label htmlFor="my-modal-3" className=" bg-red-400 p-2  font-bold rounded cursor-pointer btn-xs">
+              Update Profile
             </label>
-            <input
-              type="text"
-              disabled
-              defaultValue={userData?.name}
-              className="input input-bordered w-full max-w-xs"
-            />
+            <BookingModal
+              userData={userData}
+              userDetails={userDetails}
+              refetch={refetch}
+              isLoading={isLoading}
+            ></BookingModal>
           </div>
-          <div className="form-control my-6 w-full max-w-xs">
-            <label className="label">
-              <span className="label-text">Email</span>
-            </label>
-            <input
-            defaultValue={userData?.email}
-              type="email"
-              disabled
-              className="input input-bordered w-full max-w-xs"
-            />
-          </div>
-          <div className="form-control my-6 w-full max-w-xs">
-            <label className="label">
-              <span className="label-text">University/School/College</span>
-            </label>
-            <input
-            defaultValue={userData?.university? userData.university:"No institution added"}
-            disabled
-              type="text"
-              className="input input-bordered w-full max-w-xs"
-            />
-          </div>
-          <div className="form-control my-6 w-full max-w-xs">
-            <label className="label">
-              <span className="label-text">Address</span>
-            </label>
-            <input
-            defaultValue={userData?.address? userData.address:"No address added"}
-            disabled
-              type="text"
-              className="input input-bordered w-full max-w-xs"
-            />
-          </div>
-        </form>
-        <label htmlFor="my-modal-3" className="btn">Update Profile</label>
-        <BookingModal
-        userData={userData}
-        refetch={refetch}
-        isLoading={isLoading}
-        ></BookingModal>
+        </div>
       </div>
     </div>
-        </div>
-        </div>
-    );
+  );
 };
 
 export default About;
