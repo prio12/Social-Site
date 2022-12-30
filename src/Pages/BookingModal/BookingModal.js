@@ -36,7 +36,7 @@ const BookingModal = ({ userDetails, userData, isLoading, refetch }) => {
         if (data.modifiedCount) {
           refetch();
           toast.success("Profile Updated");
-          navigate("/message");
+          navigate("/");
         }
       });
   };

@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Trending = () => {
   const [trendingData, setTrendingData] = useState([]);
   const [isLoading, setISLoading] = useState(false);
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   useEffect(() => {
     setISLoading(true);
@@ -29,16 +35,20 @@ const Trending = () => {
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+        <div
+        data-aos="fade-up"
+          data-aos-offset="200"
+          data-aos-delay="50"
+          data-aos-duration="1000"
+          data-aos-easing="ease-in"
+          data-aos-mirror="true"
+          data-aos-once="false"
+          data-aos-anchor-placement="top-center"
+
+        className="grid grid-cols-1 mb-32 gap-3 md:grid-cols-2 lg:grid-cols-3">
           {trendingData.map((posts) => (
             <div key={posts._id} className="card shadow-2xl">
               <div className="card-body">
-                {/* <h2 className=" justify-start font-bold">
-                  {posts.name}
-                  <div className="badge justify-end p-4 badge-info">
-                    {posts.like} Likes!!!
-                  </div>
-                </h2> */}
                 <div className="flex mb-5 justify-between">
                   <h2 className="text-xl p-4 badge badge-warning font-bold">{posts.name}</h2>
                   <div className="badge badge-primary font-extrabold">

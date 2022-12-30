@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './Footer.css'
 const Footer = () => {
     return (
         <footer className="footer  footer-center mt-32 p-10  text-base-content rounded">
