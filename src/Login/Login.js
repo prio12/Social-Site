@@ -45,10 +45,10 @@ const Login = () => {
       };
     
     return (
-        <div className="h-[800px] flex justify-center items-center">
-      <div className="w-96 p-7">
-        <h2 className="text-3xl text-center">Login</h2>
-        <form onSubmit={handleSubmit(handleLogin)}>
+        <div className="h-[800px] shadow-2xl flex justify-center items-center">
+      <div className="w-96 shadow-2xl p-7">
+        <h2 className="text-3xl font-bold text-center">Login</h2>
+        <form  onSubmit={handleSubmit(handleLogin)}>
           <div className="form-control w-full max-w-xs">
             <label className="label"><span className="label-text">Email</span></label>
             <input {...register("email",{required:"Email Address is required"})} type="email" className="input input-bordered w-full max-w-xs"/>
